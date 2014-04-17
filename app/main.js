@@ -13,5 +13,5 @@ require(['Controllers/QuoteCollectionController'],
 //    console.log('stringify',JSON.stringify(users));
 //    localStorage.users = JSON.stringify(users);
 
-    QuoteCollectionController.start();
+    QuoteCollectionController.render();
 });

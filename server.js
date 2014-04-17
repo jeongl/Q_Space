@@ -11,9 +11,14 @@ app.use(methodOverride()); 					// simulate DELETE and PUT
 
 app.get('/getQuotes', function(req,res){
   var quotes = [
-      {"Thomas Edison": "Life is but a box of chocolates!"},
-      {"Tesla": "Follow your passions"},
-      {"Krishnamurti" : "Truth is a pathless land"}
+      {
+        "Person" : "Thomas Edison",
+        "Quote" : "You can't always get what you want!"
+      },
+      {
+        "Person" : 'Unknown',
+        "Quote" : "Life is good"
+      }
   ];
   res.send(quotes);
 })
