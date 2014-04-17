@@ -2,6 +2,7 @@ define(['Views/AddView', 'Models/User',
   'Controllers/ListController'], function(AddView, User, ListController){
 
   function start(){
+    console.log('Start Add Controller!');
     AddView.render();
     bindEvents();
   }
@@ -20,4 +21,5 @@ define(['Views/AddView', 'Models/User',
   return {
     start : start
   }
+
 })
