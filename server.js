@@ -9,5 +9,5 @@ app.use(morgan('dev')); 					// log every request to the console
 app.use(bodyParser()); 						// pull information from html in POST
 app.use(methodOverride()); 					// simulate DELETE and PUT
 
-app.listen(3000);
-console.log('Check port 3000');
+app.listen(3001);
+console.log('Check port 3001');
