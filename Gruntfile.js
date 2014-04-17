@@ -31,7 +31,7 @@ module.exports = function (grunt) {
         options: {
           livereload: true
         },
-        tasks: ['express:dev']
+//        tasks: ['express:dev']
       },
       dev: {
         files: ['app/js/model/**/*'],

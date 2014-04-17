@@ -5,6 +5,8 @@ define(function(){
     var appDiv = document.getElementById('list');
     var users = parameters.users;
 
+//    console.log(users);
+
     var html = '<ul>';
     for (var i = 0, len = users.length; i < len; i++){
       html+= '<li>' + users[i].name + '</li>';

@@ -9,5 +9,15 @@ app.use(morgan('dev')); 					// log every request to the console
 app.use(bodyParser()); 						// pull information from html in POST
 app.use(methodOverride()); 					// simulate DELETE and PUT
 
+app.get('/getQuotes', function(req,res){
+  var quotes = [
+      {"Thomas Edison": "Life is but a box of chocolates!"},
+      {"Tesla": "Follow your passions"},
+      {"Krishnamurti" : "Truth is a pathless land"}
+  ];
+  res.send(quotes);
+})
+
+
 app.listen(3001);
 console.log('Check port 3001');

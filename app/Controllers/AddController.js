@@ -21,5 +21,4 @@ define(['Views/AddView', 'Models/User',
   return {
     start : start
   }
-
 })
