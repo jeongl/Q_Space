@@ -1,9 +1,10 @@
 define(function() {
   var routes = [
+    {hash: '#index', controller: 'IndexViewController'},
     {hash: '#list', controller: 'ListController'},
     {hash: '#add', controller: 'AddController'}
     ];
-  var defaultRoute = '#list';
+  var defaultRoute = '#index';
   var currentHash = '';
 
   function startRouting() {

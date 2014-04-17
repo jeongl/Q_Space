@@ -1,18 +1,12 @@
-define(['Models/QuoteCollection',
-  'Views/QuoteCollectionView',
-  'hbs!assets/templates/One'],function(QuoteCollection, QuoteCollectionView, quoteTempl) {
+define(['Models/QuoteCollection','Views/QuoteCollectionView'],function(QuoteCollection, QuoteCollectionView) {
     var quoteCollection = new QuoteCollection();
 
   function render() {
-    quoteCollection.fetch(function(response){
-      QuoteCollectionView(response);
-      var quotes = document.getElementById('Quotes');
-      quotes.innerHTML= quoteTempl(response);
-    });
-  }
+    QuoteCollectionView.render();
+  };
 
   return {
-    render : render
+    start: render
   }
 
 });

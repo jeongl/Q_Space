@@ -3,15 +3,9 @@ require.config({
     hbs: '../lib/require-handlebars-plugin/hbs'
   }
 }),
-require(['Controllers/QuoteCollectionController'],
-  function(QuoteCollectionController){
+require(['Controllers/QuoteCollectionController',
+  'Controllers/IndexViewController', 'Routers/Routes'],
+  function(QuoteCollectionController, IndexViewController, Router){
+    Router.startRouting();
 
-//    var users = [new User('Barney'),
-//      new User('Cartman'),
-//      new User('Sheldon')];
-//
-//    console.log('stringify',JSON.stringify(users));
-//    localStorage.users = JSON.stringify(users);
-
-    QuoteCollectionController.render();
-});
+  });
