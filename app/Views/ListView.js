@@ -2,15 +2,17 @@ define(function(){
 
   function render(parameters){
 
-    var appDiv = document.getElementById('app');
+    var appDiv = document.getElementById('list');
     var users = parameters.users;
 
     var html = '<ul>';
     for (var i = 0, len = users.length; i < len; i++){
       html+= '<li>' + users[i].name + '</li>';
     }
-    html+= '</ul>'
-    appDiv.innerHTML+= html;
+    html+= '</ul>';
+    console.log(html);
+
+    appDiv.innerHTML= html;
 
   }
 

@@ -8,4 +8,5 @@ define(['Views/ListView'], function(ListView){
   return {
     start : start
   }
+
 });

@@ -4,7 +4,6 @@ define(['Views/AddView', 'Models/User',
   function start(){
     AddView.render();
     bindEvents();
-    console.log('here!');
   }
 
   function bindEvents(){
@@ -13,8 +12,8 @@ define(['Views/AddView', 'Models/User',
       var userName = document.getElementById('user-name').value;
       users.push(new User(userName));
       localStorage.users = JSON.stringify(users);
+
       ListController.start();
-      AddView.render();
     }, false);
   }
 
