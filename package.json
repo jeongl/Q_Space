@@ -20,6 +20,7 @@
     "grunt-express-server": "~0.4.13",
     "path": "~0.4.9",
     "request": "~2.34.0",
-    "cheerio": "~0.15.0"
+    "cheerio": "~0.15.0",
+    "async": "~0.8.0"
   }
 }
