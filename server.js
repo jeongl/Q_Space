@@ -35,15 +35,17 @@ app.get('/getQuotes', function(req,res){
     });
     processASYNC(
         (function() {
-          var temp1=[];
+          var links=[];
 
           for (var i=0; i<5; i++){
             var random = Math.floor(Math.random()*temp.length+1)
-            var split = JSON.stringify(temp[random].link).split('/')[4];
-            split = split.split('.')[0];
-            temp1.push(split);
+            var split = JSON.stringify(temp[random].link);
+            links.push({
+              link: split.replace("\"",'').replace("\"",''),
+              name: split.split('/')[4].replace('.html','')
+            })
           }
-          return temp1;
+          return links;
         }())
     );
   });
@@ -51,8 +53,8 @@ app.get('/getQuotes', function(req,res){
 
   function processASYNC(insert) {
     console.log(insert);
-    async.forEach(temp, function(item, callback){
-//      console.log(item.link);
+    async.forEach(insert[0], function(item, callback){
+      console.log(insert[item][item].link);
     });
   }
 
