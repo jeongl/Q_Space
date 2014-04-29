@@ -10,6 +10,7 @@ define(function() {
       method: 'get',
       success: function(resp){
         this.quote = resp;
+//        console.log(JSON.stringify(resp, null, 2));
         callback(resp);
       }
     });

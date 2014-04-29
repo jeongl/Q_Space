@@ -27,11 +27,11 @@ module.exports = function (grunt) {
     },
     watch: {
       development: {
-        files: ['app/**/*.js'],
+        files: ['app/**/*.js', 'server.js'],
         options: {
           livereload: true
         },
-//        tasks: ['express:dev']
+        tasks: ['express:dev']
       },
       dev: {
         files: ['app/js/model/**/*'],
