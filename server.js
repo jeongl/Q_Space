@@ -58,11 +58,9 @@ app.get('/getQuotes', function(req,res){
         var $ = cheerio.load(body);
         var selector = $('.bqQuoteLink');
         var elLENGTH= selector.get().length;
-
-        console.log('random Number:', Math.floor(Math.random()*(elLENGTH-0)+0));
+//        console.log('random Number:', Math.floor(Math.random()*(elLENGTH-0)+0));
         var quote = selector.eq(Math.floor(Math.random()*(elLENGTH-1)+1)).text();
-        console.log('quote:', quote);
-
+//        console.log('quote:', quote);
         temp2.push({
           name:item.name,
           quote:quote
@@ -78,18 +76,6 @@ app.get('/getQuotes', function(req,res){
       else res.send(temp2);
     });
   }
-
-  var quotes = [
-      {
-        "Person" : "Unknown",
-        "Quote" : "You can't always get what you want!"
-      },
-      {
-        "Person" : 'Unknown',
-        "Quote" : "Life is good"
-      }
-  ];
-//  res.send(JSON.parse(body));
 })
 
 

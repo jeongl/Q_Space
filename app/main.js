@@ -1,6 +1,7 @@
 require.config({
   paths: {
-    hbs: '../lib/require-handlebars-plugin/hbs'
+    hbs: '../lib/require-handlebars-plugin/hbs',
+    Two: '../bower_components/two/build/two'
   }
 }),
 require(['Controllers/QuoteCollectionController',
