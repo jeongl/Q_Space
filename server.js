@@ -37,7 +37,7 @@ app.get('/getQuotes', function(req,res){
         (function() {
           var links=[];
 
-          for (var i=0; i<5; i++){
+          for (var i=0; i<10; i++){
             var random = Math.floor(Math.random()*temp.length+1)
             var split = JSON.stringify(temp[random].link);
             links.push({
@@ -50,14 +50,25 @@ app.get('/getQuotes', function(req,res){
     );
   });
 
-
   function processASYNC(insert) {
-    console.log(insert);
-    async.forEach(insert[0], function(item, callback){
-      console.log(insert[item][item].link);
+    var temp2=[];
+    async.each(insert, function(item, callback){
+      var url = 'http://www.brainyquote.com' + item.link;
+      request(url, function(err, response, body){
+        var $ = cheerio.load(body);
+        var quote = $('.bqQuoteLink').first().text();
+        console.log(quote, '\n');
+        temp2.push({
+          name:item.name,
+          quote:quote
+        })
+      })
+      try {
+        console.log(item.link);
+      }
+      catch(e){}
     });
   }
-
 
   var quotes = [
       {
