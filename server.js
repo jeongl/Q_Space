@@ -33,20 +33,20 @@ app.get('/getQuotes', function(req,res){
         });
       }
     });
-    processASYNC(
-        (function() {
-          var links=[];
 
-          for (var i=0; i<10; i++){
-            var random = Math.floor(Math.random()*temp.length+1)
-            var split = JSON.stringify(temp[random].link);
-            links.push({
-              link: split.replace("\"",'').replace("\"",''),
-              name: split.split('/')[4].replace('.html','')
-            })
-          }
-          return links;
-        }())
+    processASYNC(
+      (function() {
+        var links=[];
+        for (var i=0; i<10; i++){
+          var random = Math.floor(Math.random()*temp.length+1)
+          var split = JSON.stringify(temp[random].link);
+          links.push({
+            link: split.replace("\"",'').replace("\"",''),
+            name: split.split('/')[4].replace('.html','')
+          })
+        }
+        return links;
+      }())
     );
   });
 
@@ -55,19 +55,14 @@ app.get('/getQuotes', function(req,res){
     async.each(insert, function(item, callback){
       var url = 'http://www.brainyquote.com' + item.link;
       request(url, function(err, response, body){
-        var count=0;
         var $ = cheerio.load(body);
-//        var quote = $('.bqQuoteLink');
-//        console.log(quote, '\n');
-//        $('.bqQuoteLink').each(function(index, elem){
-//          console.log($(this).text());
-//        })
         var selector = $('.bqQuoteLink');
-//        var name = $('h1').text();
         var elLENGTH= selector.get().length;
+
         console.log('random Number:', Math.floor(Math.random()*(elLENGTH-0)+0));
         var quote = selector.eq(Math.floor(Math.random()*(elLENGTH-1)+1)).text();
         console.log('quote:', quote);
+
         temp2.push({
           name:item.name,
           quote:quote
@@ -78,7 +73,6 @@ app.get('/getQuotes', function(req,res){
         console.log(item.link, '\r');
       }
       catch(e){}
-
     }, function(err){
       if (err) res.send('error');
       else res.send(temp2);
