@@ -10,4 +10,4 @@ require(['Controllers/QuoteCollectionController',
   function(QuoteCollectionController, IndexViewController, Router){
     Router.startRouting();
 
-  });
+});

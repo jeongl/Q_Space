@@ -7,8 +7,13 @@ define(['Models/QuoteCollection', 'hbs!assets/templates/quoteCollection'],functi
       var quotes = document.getElementById('Quotes');
       quotes.innerHTML = quoteTempl(response);
 
-      callback.success(spin);
+
+      render.prototype.success(spin, callback)
     });
+  }
+
+  render.prototype.success = function(spin, callback){
+    callback.success(spin);
   }
 
   return {
