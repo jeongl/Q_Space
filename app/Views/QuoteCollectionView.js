@@ -2,13 +2,14 @@ define(['Models/QuoteCollection', 'hbs!assets/templates/quoteCollection'],functi
 
   var quoteCollection = new QuoteCollection();
 
-  function render(){
+  function render(spin, callback){
     quoteCollection.fetch(function(response){
       var quotes = document.getElementById('Quotes');
       quotes.innerHTML = quoteTempl(response);
+
+      callback.success(spin);
     });
   }
-
 
   return {
     render:render

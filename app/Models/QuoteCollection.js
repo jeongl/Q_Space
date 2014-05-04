@@ -13,7 +13,7 @@ define(['Two'],function(Two) {
 //        console.log(JSON.stringify(resp, null, 2));
         for (var i=0; i<10; i++){
           var random = Math.floor(Math.random()*resp.length+1)
-          console.log(JSON.stringify(resp[random], null, 2));
+//          console.log(JSON.stringify(resp[random], null, 2));
         }
         callback(resp);
       }

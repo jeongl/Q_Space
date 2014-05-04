@@ -17,7 +17,6 @@ app.get('/getQuotes', function(req,res){
 
   request('http://www.brainyquote.com/quotes/favorites', function(err, response, body){
     var $ = cheerio.load(body);
-
     $('div.bq_s a').map(function(index, el){
       if(String($(this).attr('href')).split('/').length === 5){
         temp.push({
@@ -33,7 +32,6 @@ app.get('/getQuotes', function(req,res){
         });
       }
     });
-
     processASYNC(
       (function() {
         var links=[];
@@ -76,6 +74,7 @@ app.get('/getQuotes', function(req,res){
       else res.send(temp2);
     });
   }
+
 })
 
 

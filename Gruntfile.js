@@ -30,7 +30,7 @@ module.exports = function (grunt) {
         files: ['app/**/*.js', 'server.js'],
         options: {
           livereload: true,
-          spawn: false
+//          spawn: false
         },
         tasks: ['express:dev']
       },
