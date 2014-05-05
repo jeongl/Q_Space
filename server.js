@@ -12,7 +12,7 @@ app.use(bodyParser()); 						// pull information from html in POST
 app.use(methodOverride()); 					// simulate DELETE and PUT
 
 
-if ('development' === process.env.NODE_ENV){
+if ('development' === process.env.NODE_ENV || undefined === process.env.NODE_ENV){
   console.log('process.env.NODE_ENV =', process.env.NODE_ENV);
   mongoose.connect('mongodb://localhost/quoteSpace-development');
   scheduler();

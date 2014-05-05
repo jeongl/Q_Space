@@ -5,6 +5,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-mongoimport');
+  grunt.loadNpmTasks('grunt-mocha-cov');
+  grunt.loadNpmTasks('grunt-simple-mocha');
+  grunt.loadNpmTasks('grunt-mongo-drop');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -80,7 +83,56 @@ module.exports = function (grunt) {
         ]
       }
     },
+    simplemocha: {
+      test:{
+        src:['test/*_Test.js'],
+        options:{
+          reporter: 'spec',
+          slow: 200,
+          timeout: 1000,
+          node_env: 'test'
+        }
+      }
+    },
+    mochacov: {
+      coverage: {
+        options: {
+          reporter: 'mocha-term-cov-reporter',
+          coverage: true
+        }
+      },
+      coveralls: {
+        options: {
+          coveralls: {
+            serviceName: 'travis-ci'
+          }
+        }
+      },
+      unit: {
+        options: {
+          reporter: 'spec',
+          require: ['chai']
+        }
+      },
+      html: {
+        options: {
+          reporter: 'html-cov',
+          require: ['chai']
+        }
+      },
+      options: {
+        files: 'test/*.js',
+        ui: 'bdd',
+        colors: true
+      }
+    },
+    mongo_drop: {
+      test: {
+        'uri' : 'mongodb://localhost/quoteSpace-development'
+      }
+    },
   });
 
-  grunt.registerTask('default', ['express:dev', 'watch:development']);
+  grunt.registerTask('default', [ 'test', 'express:dev', 'watch:development']);
+  grunt.registerTask('test', ['mongo_drop', 'simplemocha']);
 };
