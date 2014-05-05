@@ -1,10 +1,12 @@
 var request        = require('request');
 var cheerio        = require('cheerio');
 var async          = require('async');
-var DailySave = require('./DailySave')
+var DailySave      = require('./DailySave')
 
 exports.getQuotes = function(req,res){
   var temp=[];
+  var date = new Date();
+
   request('http://www.brainyquote.com/quotes/favorites', function(err, response, body){
     var $ = cheerio.load(body);
     $('div.bq_s a').map(function(index, el){
@@ -25,7 +27,7 @@ exports.getQuotes = function(req,res){
     processASYNC(
         (function() {
           var links=[];
-          for (var i=0; i<200; i++){
+          for (var i=0; i<5; i++){
             var random = Math.floor(Math.random()*temp.length+1)
             var split = JSON.stringify(temp[random].link);
             links.push({
@@ -52,8 +54,8 @@ exports.getQuotes = function(req,res){
         temp2.push({
           name:item.name,
           quote:quote,
-          Time:'',
-          Date:'',
+          Time:date.getHours() +' : '+ date.getMinutes(),
+          Date:date,
           Votes:0
         })
         callback(null);
@@ -65,7 +67,7 @@ exports.getQuotes = function(req,res){
     }, function(err){
       if (err) res.send('error');
       else {
-        DailySave.Save({Comments:temp2});
+        DailySave.Save(temp2, date);
         res.send(temp2);
       }
     });

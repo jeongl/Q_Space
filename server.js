@@ -4,6 +4,7 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var app            = express();
 var mongoose       = require('mongoose');
+var scheduler = require('./api/scheduler/DailyTasks');
 
 app.use(express.static(__dirname));
 app.use(morgan('dev')); 					// log every request to the console
@@ -14,7 +15,9 @@ app.use(methodOverride()); 					// simulate DELETE and PUT
 if ('development' === process.env.NODE_ENV){
   console.log('process.env.NODE_ENV =', process.env.NODE_ENV);
   mongoose.connect('mongodb://localhost/quoteSpace-development');
+  scheduler();
 }
+
 
 var quotes = require('./api/routes/quoteRoutes');
 

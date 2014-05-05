@@ -62,11 +62,11 @@ module.exports = function (grunt) {
         //stopOnError : false,
         collections : [
           {
-            name : 'users',
-            type : 'json',
-            file : 'db/seeds/users.json',
-            jsonArray : true,  //optional
-            upsert : true,  //optional
+            name : 'quotes',
+//            type : 'json',
+//            file : 'db/seeds/users.json',
+//            jsonArray : true,  //optional
+//            upsert : true,  //optional
             drop : true  //optional
           },
           {
