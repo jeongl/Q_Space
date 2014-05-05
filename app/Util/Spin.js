@@ -8,7 +8,7 @@ define(['Spin'],function(Spin){
     corners: 1, // Corner roundness (0..1)
     rotate: 54, // The rotation offset
     direction: 1, // 1: clockwise, -1: counterclockwise
-    color: '#000', // #rgb or #rrggbb or array of colors
+    color: '#125', // #rgb or #rrggbb or array of colors
     speed: 1, // Rounds per second
     trail: 100, // Afterglow percentage
     shadow: true, // Whether to render a shadow

@@ -1,4 +1,4 @@
-define(['Models/QuoteCollection', 'hbs!assets/templates/quoteCollection'],function(QuoteCollection, quoteTempl) {
+define(['Models/QuoteCollection', 'hbs!assets/templates/quoteCollection', 'Util/fadeIn'],function(QuoteCollection, quoteTempl, FadeIn) {
 
   var quoteCollection = new QuoteCollection();
 
@@ -6,7 +6,7 @@ define(['Models/QuoteCollection', 'hbs!assets/templates/quoteCollection'],functi
     quoteCollection.fetch(function(response){
       var quotes = document.getElementById('Quotes');
       quotes.innerHTML = quoteTempl(response);
-
+      FadeIn(quotes);
 
       render.prototype.success(spin, callback)
     });
