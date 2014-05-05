@@ -18,7 +18,6 @@ define(function(){
     tick();
   }
 
-
   return fadeIn
 
 })

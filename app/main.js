@@ -5,9 +5,9 @@ require.config({
     Spin: '../bower_components/spin/spin.min'
   }
 }),
-require(['Controllers/QuoteCollectionController',
-  'Controllers/IndexViewController', 'Routers/Routes'],
-  function(QuoteCollectionController, IndexViewController, Router){
-    Router.startRouting();
+    require(['Controllers/QuoteCollectionController',
+      'Controllers/IndexViewController', 'Routers/Routes'],
+        function(QuoteCollectionController, IndexViewController, Router){
+          Router.startRouting();
 
-});
+        });
