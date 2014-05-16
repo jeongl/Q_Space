@@ -24,5 +24,6 @@ var quotes = require('./api/routes/quoteRoutes');
 app.get('/getQuotes', quotes.getQuotes);
 
 
+console.log('contact me!');
 app.listen(3001);
 console.log('Check port 3001');

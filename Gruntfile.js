@@ -36,7 +36,7 @@ module.exports = function (grunt) {
           livereload: true,
           spawn: false
         },
-        tasks: ['express:dev']
+        tasks: ['express:dev' ]
       },
       dev: {
         files: ['app/js/model/**/*'],
@@ -133,6 +133,6 @@ module.exports = function (grunt) {
     },
   });
 
-  grunt.registerTask('default', [ 'test', 'express:dev', 'watch:development']);
+  grunt.registerTask('default', [ 'test',  'watch:development']);
   grunt.registerTask('test', ['mongo_drop', 'simplemocha']);
 };

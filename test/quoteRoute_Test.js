@@ -4,7 +4,7 @@ var superagent = require('superagent');
 var chai = require('chai'),
     expect = chai.expect,
     should = chai.should();
-var app = require('../server');
+var app = require('../server').app;
 
 describe('Meetings JSON api', function() {
   this.timeout(2000);
