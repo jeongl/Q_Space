@@ -7,7 +7,7 @@ var chai = require('chai'),
 var app = require('../server').app;
 
 describe('Meetings JSON api', function() {
-  this.timeout(2000);
+  this.timeout(5000);
 
   it('can get a collection of agenda items for a meeting', function(done) {
     superagent.get('http://localhost:3001/getQuotes/')

@@ -4,7 +4,8 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var app            = express();
 var mongoose       = require('mongoose');
-var scheduler = require('./api/scheduler/DailyTasks');
+var scheduler      = require('./api/scheduler/DailyTasks');
+var moment         = require('moment');
 
 app.use(express.static(__dirname));
 app.use(morgan('dev')); 					// log every request to the console
@@ -18,12 +19,13 @@ if ('development' === process.env.NODE_ENV || undefined === process.env.NODE_ENV
   scheduler();
 }
 
-
 var quotes = require('./api/routes/quoteRoutes');
 
-app.get('/getQuotes', quotes.getQuotes);
+app.get('/getQuotes', function(req, res){
+  quotes.checkQuotes(function(response){
+    console.log('response === ', response);
+  },'development', res);
+});
 
-
-console.log('contact me!');
 app.listen(3001);
 console.log('Check port 3001');

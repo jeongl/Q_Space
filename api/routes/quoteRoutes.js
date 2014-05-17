@@ -1,7 +1,28 @@
 var request        = require('request');
 var cheerio        = require('cheerio');
 var async          = require('async');
-var DailySave      = require('./DailySave')
+var DailySave      = require('./DailySave');
+var moment         = require('moment');
+
+exports.checkQuotes = function(fn,env,res){
+  var todaysDate = moment().format('MMMM Do YYYY');
+  var yesterdaysDate = moment().subtract('days', 1).format('MMMM Do YYYY');
+
+  DailySave.checkQuotes(todaysDate,yesterdaysDate, function(response){
+    if (response === 'None_Found!'){
+      console.log('none_found!');
+      if ('development' === env){
+        exports.getQuotes(null,res);
+        fn('scraping');
+      }
+    }
+    else{
+      console.log('response!', JSON.stringify(response, null, 2));
+      fn('existing');
+      res.send(response[0].Comments);
+    }
+  });
+}
 
 exports.getQuotes = function(req,res){
   var temp=[];
@@ -25,18 +46,20 @@ exports.getQuotes = function(req,res){
       }
     });
     processASYNC(
-        (function() {
-          var links=[];
-          for (var i=0; i<5; i++){
-            var random = Math.floor(Math.random()*temp.length+1)
-            var split = JSON.stringify(temp[random].link);
-            links.push({
-              link: split.replace("\"",'').replace("\"",''),
-              name: split.split('/')[4].replace('.html','')
-            })
-          }
-          return links;
-        }())
+      (function() {
+        var links=[];
+        for (var i=0; i<5; i++){
+          var random = Math.floor(Math.random()*temp.length+1)
+          var split = JSON.stringify(temp[random].link);
+          var name = split.split('/')[4].replace('.html','')
+          console.log('name:', name);
+          links.push({
+            link: split.replace("\"",'').replace("\"",''),
+            name: name
+          })
+        }
+        return links;
+      }())
     );
   });
 
@@ -55,7 +78,7 @@ exports.getQuotes = function(req,res){
           name:item.name,
           quote:quote,
           Time:date.getHours() +' : '+ date.getMinutes(),
-          Date:date,
+          Date:moment().format('MMMM Do YYYY'),
           Votes:0
         })
         callback(null);
@@ -68,6 +91,7 @@ exports.getQuotes = function(req,res){
       if (err) res.send('error');
       else {
         DailySave.Save(temp2, date);
+//        console.log(temp2);
         res.send(temp2);
       }
     });
