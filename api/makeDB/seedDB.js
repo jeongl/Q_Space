@@ -7,15 +7,7 @@ module.exports = function() {
 }
 
 module.exports.DestroyCreateDBs = function(pool, options) {
- 
-	// var Databases = (function() {
-	// 	var tempArray=[];
-	// 	for (var i=0; i<45; i++){
-	// 		tempArray.push('first' + String(i));
-	// 	}
-	// 	return tempArray
-	// }());
-
+	
 	var statements = {
 		drop : 'drop database if exists ',
 		create : 'create database if not exists '
