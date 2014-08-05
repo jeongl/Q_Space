@@ -6,12 +6,14 @@ var app            = express();
 var mongoose       = require('mongoose');
 var scheduler      = require('./api/scheduler/DailyTasks');
 var moment         = require('moment');
+var seedDB         = require('./api/makeDB/seedDB');
 
 var mysql = require('mysql');
-var pool  = mysql.createPool({
+var pool  = module.exports.pool = mysql.createPool({
   host     : 'localhost',
   user     : 'root'
 });
+
 
 
 pool.getConnection(function(err, connection) {
@@ -26,28 +28,12 @@ pool.getConnection(function(err, connection) {
 
 pool.on('connection', function(){console.log('connected!!!!!!')});
 
-// require('./api/makeDB/seedDB').DestroyCreateDBs(pool,{
-// 	DropDBs : ['first','second', 'third', 'fourth', 'Forum', 'hmmm'],
-// 	AddDBs : ['first','second', 'third', 'fourth', 'hmmm']
-// });
-
-
-require('./api/makeDB/seedDB').DestroyCreateDBs(pool,{
-	DropDBs : (function() {
-		var temp=[];
-		for (var i=0; i<200; i++){
-			temp.push('DB'+ i);
-		}
-		return temp
-	}()),
-	AddDBs : (function() {
-		var temp =[];
-		for (var i=0; i<0; i++){
-			temp.push('DB' + i);
-		}
-		return temp
-	}())
+seedDB.DestroyCreateDBs(pool,{
+	DropDBs : ['first','second', 'third', 'fourth', 'Forum', 'hmmm'],
+	AddDBs : ['Quotes']
 });
+
+seedDB.SetupQuotesTable(pool);
 
 
 app.use(express.static(__dirname));

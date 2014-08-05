@@ -7,7 +7,7 @@ module.exports = function() {
 }
 
 module.exports.DestroyCreateDBs = function(pool, options) {
-	
+
 	var statements = {
 		drop : 'drop database if exists ',
 		create : 'create database if not exists '
@@ -37,8 +37,37 @@ module.exports.DestroyCreateDBs = function(pool, options) {
 			    connection.release();
 			    // Don't use the connection here, it has been returned to the pool.
 			  });
-			});  		
-		})
+			});
+		});
   }
 
 }
+
+module.exports.SetupQuotesTable = function(pool) {
+
+	pool.getConnection(function(err, connection){
+		if (err) throw err;
+		connection.query('use Quotes', function(err, res, fields){
+			if (err) throw err;
+			var query = 'create table if not exists users (' +
+				'id int not null auto_increment, ' +
+				'primary key (id),' +
+				'Name varchar(100) not null,'  +
+				'Quote varchar(500) not null,' +
+				'Time varchar(100) not null,'  +
+				'Date varchar(100) not null,' +
+				'Votes int not null' +
+				')'
+			connection.query(query, function(err, res, fields){
+				if (err) throw err;
+			});
+			connection.release();
+		});
+	});
+
+}
+
+
+
+
+

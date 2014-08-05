@@ -3,6 +3,7 @@ var cheerio        = require('cheerio');
 var async          = require('async');
 var DailySave      = require('./DailySave');
 var moment         = require('moment');
+var pool           = require('../../server.js').pool;
 
 exports.checkQuotes = function(fn,env,res){
   var todaysDate = moment().format('MMMM Do YYYY');
@@ -48,7 +49,7 @@ exports.getQuotes = function(req,res){
     processASYNC(
       (function() {
         var links=[];
-        for (var i=0; i<5; i++){
+        for (var i=0; i<100; i++){
           var random = Math.floor(Math.random()*temp.length+1)
           var split = JSON.stringify(temp[random].link);
           var name = split.split('/')[4].replace('.html','')
@@ -91,7 +92,7 @@ exports.getQuotes = function(req,res){
     }, function(err){
       if (err) res.send('error');
       else {
-        DailySave.Save(temp2, date);
+        DailySave.SaveQuoteSQL(pool, temp2);
         res.send(temp2);
       }
     });

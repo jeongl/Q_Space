@@ -8,6 +8,8 @@ require.config({
 }),
 require(['Controllers/QuoteCollectionController',
 'Controllers/IndexViewController', 'Routers/Routes'],
+
   function(QuoteCollectionController, IndexViewController, Router){
     Router.startRouting();
-});
+    console.log('Routing started: ');
+  });
