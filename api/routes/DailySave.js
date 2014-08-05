@@ -82,7 +82,7 @@ module.exports.checkQuotes = function(todaysDate, yesterdaysDate, fn) {
       fn(rows);
     }
     else {
-      fn('None_Found');
+      fn('None_Found!');
     }
   });
   

@@ -50,7 +50,7 @@ exports.getQuotes = function(req,res){
     processASYNC(
       (function() {
         var links=[];
-        for (var i=0; i<10; i++){
+        for (var i=0; i<1000; i++){
           var random = Math.floor(Math.random()*temp.length+1)
           var split = JSON.stringify(temp[random].link);
           var name = split.split('/')[4].replace('.html','');

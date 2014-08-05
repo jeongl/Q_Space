@@ -14,7 +14,8 @@ define(['Models/QuoteCollection', 'hbs!assets/templates/quoteCollection', 'Util/
   }
 
   render.prototype.success = function(spin, callback){
-    callback.success(spin);
+    callback.success.call(this,spin);
+    console.log('1');
   }
 
   return {

@@ -29,7 +29,7 @@ pool.getConnection(function(err, connection) {
 pool.on('connection', function(){console.log('connected!!!!!!')});
 
 seedDB.DestroyCreateDBs(pool,{
-	DropDBs : ['first','second', 'third', 'fourth', 'Forum', 'hmmm' ],
+	DropDBs : ['first','second', 'third', 'fourth', 'Forum', 'hmmm', 'Quotes' ],
 	AddDBs : ['Quotes']
 });
 
