@@ -1,5 +1,6 @@
 var Quote = require('../models/Quote');
 var moment = require('moment');
+var pool = require('../../server.js').pool;
 
 module.exports.Save = function(Comments, date){
   var quote = new Quote({
@@ -23,7 +24,7 @@ module.exports.SaveQuoteSQL = function(pool, quotes) {
   pool.getConnection(function(err, connection) {
     connection.query('use Quotes', function(err, rows) {
       for (var i in quotes ) {
-        var values = [ quotes[i].name, quotes[i].quote, moment().format('h:mm:ss a')  , moment().format("MMM Do YY"), 0];
+        var values = [ quotes[i].name, quotes[i].quote, moment().format('h:mm:ss a')  , moment().format("MMMM Do YYYY"), 0];
         connection.query (query, values , function(err) {
           if (err) throw err;
         })                        
@@ -37,7 +38,27 @@ module.exports.SaveQuoteSQL = function(pool, quotes) {
 
 }
 
-module.exports.checkQuotes= function(todaysDate, yesterdaysDate,fn){
+
+module.exports.findQuote = function(Date, fn) {
+
+  var query = 'select * from users where Date=? ';
+  var send = null;
+
+  pool.getConnection(function(err, connection) {
+    connection.query('use Quotes', function(err, rows) {
+      if (err) throw err;
+      connection.query(query, Date, function(err, rows, fields){
+        if (err) throw err;
+        else fn(rows);
+      })
+    })
+    connection.release();
+  });
+
+}
+
+
+module.exports.checkQuotess= function(todaysDate, yesterdaysDate,fn){
   Quote.find({Date: todaysDate},function(err,res){
     if (res.length!==0){
       fn(res);
@@ -54,3 +75,28 @@ module.exports.checkQuotes= function(todaysDate, yesterdaysDate,fn){
     }
   });
 }
+
+module.exports.checkQuotes = function(todaysDate, yesterdaysDate, fn) {
+  exports.findQuote(todaysDate, function(rows) {
+    if (rows.length > 0) {
+      fn(rows);
+    }
+    else {
+      fn('None_Found');
+    }
+  });
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,7 +20,8 @@ exports.checkQuotes = function(fn,env,res){
     else{
       console.log('response!', JSON.stringify(response, null, 2));
       fn('existing');
-      res.send(response[0].Comments);
+      //Send back to client here.
+      res.send(response);
     }
   });
 }
@@ -49,14 +50,14 @@ exports.getQuotes = function(req,res){
     processASYNC(
       (function() {
         var links=[];
-        for (var i=0; i<100; i++){
+        for (var i=0; i<10; i++){
           var random = Math.floor(Math.random()*temp.length+1)
           var split = JSON.stringify(temp[random].link);
-          var name = split.split('/')[4].replace('.html','')
+          var name = split.split('/')[4].replace('.html','');
           console.log('name:', name);
           links.push({
             link: split.replace("\"",'').replace("\"",''),
-            name: name
+            name: name.match(/^.+[\w]/)[0]
           })
         }
         return links;
@@ -93,6 +94,7 @@ exports.getQuotes = function(req,res){
       if (err) res.send('error');
       else {
         DailySave.SaveQuoteSQL(pool, temp2);
+        //Send back to client here.
         res.send(temp2);
       }
     });
