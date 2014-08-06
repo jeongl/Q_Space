@@ -1,7 +1,7 @@
-define(['Views/QuoteCollectionView', 'Util/Spin', 'hbs/handlebars'],function(QuoteCollectionView, Spin, Handlebars) {  
+define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(QuoteCollectionView, Spin, SaveVote) {  
 
   ////
-  ////
+  ////  
 
   function render() {
 
@@ -34,6 +34,7 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'hbs/handlebars'],function(Quo
     }
 
     fn.attachUpVoteHandler = function() {
+      var self = this;
       $('.VoteButton').on('click',function(e) {
         var voteNum = $(e.currentTarget).siblings();
         var saveObj = {
@@ -41,13 +42,26 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'hbs/handlebars'],function(Quo
           name : $(voteNum).filter('#Name').text(),
           quote : $(voteNum).filter('#Quote').text()
         }
-        console.log('saveObj: ', JSON.stringify(saveObj, null, 2));
-        $(voteNum).filter('li.NumVotes').html( saveObj.num  );
+        self.saveToDB(saveObj, {
+          success: function(response) {
+            $(voteNum).filter('li.NumVotes').html( saveObj.num  );
+          },
+          fail: function() {
+            console.log('Failed response: ', response);
+          }
+        })
+        
       });      
     }
 
-    fn.saveToDB = function() {
-
+    fn.saveToDB = function(saveObj, fn) {
+      var saveVote = new SaveVote(saveObj);
+      saveVote.fetch(function(response){
+        if (response && response!=='Failed!') {
+          fn.success.call(null,'OK!'); 
+        }
+        else fn.fail.call(null,'Failed!');
+      });
     }
 
     return fn

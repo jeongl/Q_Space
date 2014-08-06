@@ -29,7 +29,7 @@ pool.getConnection(function(err, connection) {
 pool.on('connection', function(){console.log('connected!!!!!!')});
 
 seedDB.DestroyCreateDBs(pool,{
-	DropDBs : ['first','second', 'third', 'fourth', 'Forum', 'hmmm', 'Quotes' ],
+	DropDBs : ['first','second', 'third', 'fourth', 'Forum', 'hmmm'],
 	AddDBs : ['Quotes']
 });
 
@@ -57,6 +57,14 @@ app.get('/getQuotes', function(req, res){
     console.log('response === ', response);
   },'development', res);
 });
+
+app.post('/saveVote', function(req, res){
+	console.log('req: ', req.body);
+	res.send({
+		quote: 'All done'
+	});
+});
+
 
 app.listen(3001);
 console.log('Check port 3001');
