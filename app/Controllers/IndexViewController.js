@@ -2,11 +2,9 @@ define(['Views/IndexView', 'Controllers/QuoteCollectionController'],
   function(IndexView, QuoteCollectionController) {
     
     function render() {
-      console.log('this');
+      console.log('IndexViewController');
       IndexView.render();
-      QuoteCollectionController.start(function(response) {
-        console.log(response);
-      });
+      QuoteCollectionController.start();
     }
 
     return {

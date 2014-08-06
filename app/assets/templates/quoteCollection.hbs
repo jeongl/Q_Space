@@ -1,10 +1,11 @@
 {{#each this}}
     <ul>
-    		<div class="{{id}}">
+    		<div class="VoteButton" id={{id}}>
     			<button type="button">Vote!</button>
     		</div>
         <li>{{Name}}</li>
-        <li>{{Quote}}</li>
+        <li style="display:inline;">{{Quote}}</li>
+        <li class="NumVotes" style="display:inline; float:right;">0</li>
         ======================================================
     </ul>
 {{/each}}

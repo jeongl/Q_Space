@@ -1,37 +1,35 @@
-define(['Views/QuoteCollectionView', 'Util/Spin'],function(QuoteCollectionView, Spin) {
-
-  var self = this;
+define(['Views/QuoteCollectionView', 'Util/Spin', 'hbs/handlebars'],function(QuoteCollectionView, Spin, Handlebars) {  
 
   ////
   ////
 
   function render() {
 
-    this.shit = 'hola';
+    var self = this;
     var target = document.getElementById('spin');
     var spinner = new Spin(null, target);
 
     QuoteCollectionView.render(spinner,{
       success: function(spinner) {
         spinner.stop();
+        render.prototype.attachEvents.call(null);
       }
-    }, this);
+    });
+
 
   }
 
+
+  function getAndUpdateVal (e) {
+  }
+
   render.prototype = {
-
     attachEvents : function() {
-      $('.1').click(function() {
-        console.log($(this).next().text());
+      $('.VoteButton').on('click',function(e) {
+        var voteNum = $(e.currentTarget).siblings('li.NumVotes');
+        $(voteNum).html( Number($(voteNum).text()) + Number(1)  );
       });
-    },
-
-    test : function() {
-      console.log('this: ', this);
-      alert(this.shit);
     }
-
   }
 
   return {
