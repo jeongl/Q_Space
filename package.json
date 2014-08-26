@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "bower": "~1.3.3",
-    "bower-requirejs": "~0.10.3"
+    "bower-requirejs": "~0.10.3",
+    "mysql": "^2.4.3"
   }
 }
