@@ -2,7 +2,7 @@ require.config({
   paths: {
     hbs: '../lib/require-handlebars-plugin/hbs',
     Two: '../bower_components/two/build/two',
-    Spin: '../bower_components/spin/spin.min',
+    Spin: '../bower_components/spin.js/spin',
     jquery: '../bower_components/jquery/dist/jquery.min'
   }
 }),

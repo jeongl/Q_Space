@@ -15,21 +15,12 @@ var pool  = module.exports.pool = mysql.createPool({
 });
 
 
-
-pool.getConnection(function(err, connection) {
-  // Use the connection
-  connection.query( 'SELECT something FROM sometable', function(err, rows) {
-    // And done with the connection.
-    connection.release();
-
-    // Don't use the connection here, it has been returned to the pool.
-  });
-});
-
 pool.on('connection', function(){console.log('connected!!!!!!')});
 
 seedDB.DestroyCreateDBs(pool,{
-	DropDBs : ['first','second', 'third', 'fourth', 'Forum', 'hmmm'],
+  //The source of the undefined errors are that these two options have to be called separately upon running
+  //the program. IDK what the source of the error is. It might be better just to rewrite the Create/Delete seed program.
+	// DropDBs : ['Quotes']
 	AddDBs : ['Quotes']
 });
 
