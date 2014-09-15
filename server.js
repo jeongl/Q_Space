@@ -50,10 +50,10 @@ app.get('/getQuotes', function(req, res){
 });
 
 app.post('/saveVote', function(req, res){
-	console.log('req: ', req.body);
-	res.send({
-		quote: 'All done'
-	});
+  quotes.updateVote(req.body, function(response){
+    if (response) res.send('All done');
+    else res.send('Failed');
+  });  
 });
 
 

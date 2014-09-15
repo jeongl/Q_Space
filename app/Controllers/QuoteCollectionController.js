@@ -3,7 +3,7 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
   ////
   ////  
 
-  function render() {
+  function render(fn) {
 
     var self = this;
     var target = document.getElementById('spin');
@@ -13,21 +13,22 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
       success: function(spinner) {
         spinner.stop();
         render.prototype.attachEvents.call(null);
+        fn.call(null);
       }
     });
   }
 
-    render.prototype = {
-      attachEvents : function() {
-        voteButton.Fns = new voteButton();
-        voteButton.Fns.initialize();
-      }
+  render.prototype = {
+    attachEvents : function() {
+      voteButton.Fns = new voteButton();
+      voteButton.Fns.initialize();
     }
-
+  }
 
   function voteButton () {
 
     var fn = {};
+    var saveVote = new SaveVote(saveObj);
 
     fn.initialize = function() {
       this.attachUpVoteHandler();
@@ -45,8 +46,9 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
         self.saveToDB(saveObj, {
           success: function(response) {
             $(voteNum).filter('li.NumVotes').html( saveObj.num  );
+            // console.log('response after saving: ', response);
           },
-          fail: function() {
+          fail: function(response) {
             console.log('Failed response: ', response);
           }
         })
@@ -54,10 +56,9 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
       });      
     }
 
-    fn.saveToDB = function(saveObj, fn) {
-      var saveVote = new SaveVote(saveObj);
-      saveVote.fetch(function(response){
-        if (response && response!=='Failed!') {
+    fn.saveToDB = function(saveObj, fn) {      
+      saveVote.save(function(response){
+        if (response && response==='All done') {
           fn.success.call(null,'OK!'); 
         }
         else fn.fail.call(null,'Failed!');
@@ -67,9 +68,22 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
     return fn
   }
 
+  voteButton.updateVotes = function(){
+    
+    var firstID = $('.VoteButton').first().attr('id');
+    var lastID = $('.VoteButton').second().attr('id');
+
+    saveVote.fetch(firstID,lastID, function(){
+
+    });
+
+
+  }
+
 
   return {
-    start: render
+    render: render,
+    updateVotes: voteButton.updateVotes
   }
 
 });

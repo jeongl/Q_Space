@@ -26,6 +26,27 @@ exports.checkQuotes = function(fn,env,res){
   });
 }
 
+exports.updateVote = function(req, fn){
+
+  console.log('request: ', req);
+
+  var query = 'UPDATE users SET Votes=?' +
+  'where Name = ? and Quote = ?'
+
+  var values = [req.num, req.name, req.quote];
+
+  pool.getConnection(function(err, connection) {
+    connection.query('use Quotes', function(err, rows) {
+        connection.query (query, values , function(err) {
+          if (err) throw err;
+          else fn(rows);
+        });
+    });
+    connection.release();
+  });
+
+}
+
 exports.getQuotes = function(req,res){
   var temp=[];
   var date = new Date();

@@ -9,7 +9,7 @@ module.exports = function() {
 module.exports.DestroyCreateDBs = function(pool, options) {
 
 	var statements = {
-		drop : 'drop database if exists ',
+		drop : 'drop database',
 		create : 'create database if not exists '
 	};
 
