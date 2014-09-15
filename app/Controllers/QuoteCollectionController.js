@@ -28,7 +28,7 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
   function voteButton () {
 
     var fn = {};
-    var saveVote = new SaveVote(saveObj);
+    var saveVote=null;
 
     fn.initialize = function() {
       this.attachUpVoteHandler();
@@ -57,6 +57,7 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
     }
 
     fn.saveToDB = function(saveObj, fn) {      
+      saveVote = new SaveVote(saveObj);
       saveVote.save(function(response){
         if (response && response==='All done') {
           fn.success.call(null,'OK!'); 
@@ -68,22 +69,9 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
     return fn
   }
 
-  voteButton.updateVotes = function(){
-    
-    var firstID = $('.VoteButton').first().attr('id');
-    var lastID = $('.VoteButton').second().attr('id');
-
-    saveVote.fetch(firstID,lastID, function(){
-
-    });
-
-
-  }
-
 
   return {
-    render: render,
-    updateVotes: voteButton.updateVotes
+    render: render
   }
 
 });

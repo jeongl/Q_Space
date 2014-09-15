@@ -28,8 +28,6 @@ exports.checkQuotes = function(fn,env,res){
 
 exports.updateVote = function(req, fn){
 
-  console.log('request: ', req);
-
   var query = 'UPDATE users SET Votes=?' +
   'where Name = ? and Quote = ?'
 
@@ -37,15 +35,33 @@ exports.updateVote = function(req, fn){
 
   pool.getConnection(function(err, connection) {
     connection.query('use Quotes', function(err, rows) {
-        connection.query (query, values , function(err) {
+        connection.query (query, values , function(err, rows) {
           if (err) throw err;
           else fn(rows);
         });
     });
     connection.release();
   });
-
 }
+
+exports.getVotes = function(req, fn){
+
+  var query = 'select * from users ' +
+  'where id between ? and ?'
+
+  var values = [String(req.first), String(req.last)];
+
+  pool.getConnection(function(err, connection) {
+    connection.query('use Quotes', function(err, rows) {
+        connection.query (query, values , function(err, rows) {
+          if (err) throw err;
+          else fn(rows); 
+        });
+    });
+    connection.release();
+  });
+}
+
 
 exports.getQuotes = function(req,res){
   var temp=[];

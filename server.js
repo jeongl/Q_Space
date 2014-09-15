@@ -56,6 +56,14 @@ app.post('/saveVote', function(req, res){
   });  
 });
 
+app.get('/saveVote', function(req, res){
+  quotes.getVotes(req.query, function(response){
+    if (response) res.send(response);
+    else res.send('Failed');
+  });
+});
+
+
 
 app.listen(3001);
 console.log('Check port 3001');

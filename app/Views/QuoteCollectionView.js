@@ -10,12 +10,9 @@ define(['Models/QuoteCollection', 'hbs!assets/templates/quoteCollection', 'Util/
       quotes.innerHTML = quoteTempl(response);
       FadeIn(quotes);
 
-      render.prototype.success(spin, callback)
-    });
-  }
+      callback.success.call(null, spin);
 
-  render.prototype.success = function(spin, callback){
-    callback.success.call(null,spin);
+    });
   }
 
   return {
