@@ -24,6 +24,8 @@ seedDB.DestroyCreateDBs(pool,{
 	AddDBs : ['Quotes']
 });
 
+//return    //leave this here to run either drop or add DB option.
+
 seedDB.SetupQuotesTable(pool);
 seedDB.SetuplogInfoTable(pool);
 
@@ -43,8 +45,8 @@ var quotes =  require('./api/routes/quoteRoutes');
 var logInfo = require('./api/routes/logInfo');
 
 app.post('/logInfo', function(req,res){
-  logInfo.logInfo(function(response){
-    console.log('response: ', response);
+  logInfo.logInfo(req, function(response){
+    res.send(response);
   });
 })
 

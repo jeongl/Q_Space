@@ -9,20 +9,20 @@ module.exports = function() {
 module.exports.DestroyCreateDBs = function(pool, options) {
 
 	var statements = {
-		drop : 'drop database',
+		drop : 'drop database if exists ',
 		create : 'create database if not exists '
 	};
 
 	var start = new Date().getTime();
-	for (var each in options){
-		if (options.hasOwnProperty('DropDBs')){
-			executeQueries(statements.drop, options.DropDBs);
-		}
-		if (options.hasOwnProperty('AddDBs')){
-			executeQueries(statements.create, options.AddDBs);	
-		}
+
+	if (options.hasOwnProperty('DropDBs')){
+		executeQueries(statements.drop, options.DropDBs);
 	}
-  var end = new Date().getTime();
+	if (options.hasOwnProperty('AddDBs')){
+		executeQueries(statements.create, options.AddDBs);	
+	}
+
+	var end = new Date().getTime();
   var time = end - start;
   console.log('Start: ', start);
   console.log('End:', end);
@@ -77,6 +77,7 @@ module.exports.SetuplogInfoTable = function(pool) {
 				'id int not null auto_increment, ' +
 				'primary key (id),' +
 				'Ip varchar(100) not null,'  +
+				'Headers varchar(100) not null,'  +
 				'Time varchar(100) not null,'  +
 				'Date varchar(100) not null' +
 				')'
