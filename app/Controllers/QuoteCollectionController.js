@@ -3,7 +3,7 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
   ////
   ////  
 
-  function render(fn) {
+  function render() {
 
     var self = this;
     var target = document.getElementById('spin');
@@ -13,7 +13,6 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
       success: function(spinner) {
         spinner.stop();
         render.prototype.attachEvents.call(null);
-        fn.call(null);
       }
     });
   }
@@ -36,10 +35,11 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
 
     fn.attachUpVoteHandler = function() {
       var self = this;
-      $('.VoteButton').on('click',function(e) {
+      $('.VoteButton').on('click',function(e) {         
         var voteNum = $(e.currentTarget).siblings();
+        var offset = $(e.target)[0].innerHTML==='Vote Down!' ? -1:1;
         var saveObj = {
-          num :  Number($(voteNum).filter('li.NumVotes').text()) + Number(1),
+          num :  Number($(voteNum).filter('li.NumVotes').text()) + Number(offset),
           name : $(voteNum).filter('#Name').text(),
           quote : $(voteNum).filter('#Quote').text()
         }
@@ -51,8 +51,7 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
           fail: function(response) {
             console.log('Failed response: ', response);
           }
-        })
-        
+        })        
       });      
     }
 

@@ -25,7 +25,7 @@ seedDB.DestroyCreateDBs(pool,{
 });
 
 seedDB.SetupQuotesTable(pool);
-
+seedDB.SetuplogInfoTable(pool);
 
 app.use(express.static(__dirname));
 app.use(morgan('dev')); 					// log every request to the console
@@ -39,9 +39,14 @@ if ('development' === process.env.NODE_ENV || undefined === process.env.NODE_ENV
   scheduler();
 }
 
-var quotes = require('./api/routes/quoteRoutes');
+var quotes =  require('./api/routes/quoteRoutes');
+var logInfo = require('./api/routes/logInfo');
 
-
+app.post('/logInfo', function(req,res){
+  logInfo.logInfo(function(response){
+    console.log('response: ', response);
+  });
+})
 
 app.get('/getQuotes', function(req, res){
   quotes.checkQuotes(function(response){
@@ -55,14 +60,6 @@ app.post('/saveVote', function(req, res){
     else res.send('Failed');
   });  
 });
-
-app.get('/saveVote', function(req, res){
-  quotes.getVotes(req.query, function(response){
-    if (response) res.send(response);
-    else res.send('Failed');
-  });
-});
-
 
 
 app.listen(3001);

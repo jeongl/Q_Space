@@ -44,25 +44,6 @@ exports.updateVote = function(req, fn){
   });
 }
 
-exports.getVotes = function(req, fn){
-
-  var query = 'select * from users ' +
-  'where id between ? and ?'
-
-  var values = [String(req.first), String(req.last)];
-
-  pool.getConnection(function(err, connection) {
-    connection.query('use Quotes', function(err, rows) {
-        connection.query (query, values , function(err, rows) {
-          if (err) throw err;
-          else fn(rows); 
-        });
-    });
-    connection.release();
-  });
-}
-
-
 exports.getQuotes = function(req,res){
   var temp=[];
   var date = new Date();

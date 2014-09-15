@@ -67,7 +67,24 @@ module.exports.SetupQuotesTable = function(pool) {
 
 }
 
+module.exports.SetuplogInfoTable = function(pool) {
 
+	pool.getConnection(function(err, connection){
+		if (err) throw err;
+		connection.query('use Quotes', function(err, res, fields){
+			if (err) throw err;
+			var query = 'create table if not exists logInfo (' +
+				'id int not null auto_increment, ' +
+				'primary key (id),' +
+				'Ip varchar(100) not null,'  +
+				'Time varchar(100) not null,'  +
+				'Date varchar(100) not null' +
+				')'
+			connection.query(query, function(err, res, fields){
+				if (err) throw err;
+			});
+			connection.release();
+		});
+	});
 
-
-
+}
