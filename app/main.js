@@ -11,5 +11,9 @@ require(['Controllers/QuoteCollectionController',
 
   function(QuoteCollectionController, IndexViewController, Router){
     Router.startRouting();
+    //Todo - add callback
+    // Router.startRouting(function(){
+
+    // });
     console.log('Routing started: ');
   });

@@ -15,6 +15,7 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
         render.prototype.attachEvents.call(null);
       }
     });
+    
   }
 
   render.prototype = {
