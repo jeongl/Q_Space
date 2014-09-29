@@ -3,7 +3,8 @@ require.config({
     hbs: '../lib/require-handlebars-plugin/hbs',
     Two: '../bower_components/two/build/two',
     Spin: '../bower_components/spin.js/spin',
-    jquery: '../bower_components/jquery/dist/jquery.min'
+    jquery: '../bower_components/jquery/dist/jquery.min',
+    bootstrap: '../bower_components/bootstrap/dist/js/bootstrap.min.js'
   }
 }),
 require(['Controllers/QuoteCollectionController',

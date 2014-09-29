@@ -1,14 +1,43 @@
 {{#each this}}
-    <ul>
-    		<div class="VoteButton Up" id={{id}}>
-    			<button type="button">Vote Up!</button>
-    		</div>
-    		<div class="VoteButton Down" id={{id}}>
-    			<button type="button">Vote Down!</button>
-    		</div>
-        <li id="Name">{{Name}}</li>
-        <li id="Quote" style="display:inline;">{{Quote}}</li>
-        <li class="NumVotes" style="display:inline; float:right;">{{Votes}}</li>
-        ======================================================
-    </ul>
+  <div class="row">
+    
+    <div class="col-xs-8">
+      <ul style="list-style-type:none; ">
+          <li id="Name"><h4>{{Name}}</h4></li>
+          <li id="Quote" style="display:inline;">{{Quote}} <span>   </span> </li>
+          <!-- <li class="NumVotes" style="display:inline; float:right;">{{Votes}}</li> -->
+      </ul>
+    </div>
+
+
+    <div class="row">
+      <!-- <div class="col-sm-4"> -->
+        <div class="col-xs-1">
+          <p class="NumVotes">{{Votes}}</p>
+        </div>    
+        <div class="col-xs-3">
+          <div class="btn-group-sm VoteButton" >              
+            <button type="button" class="btn btn-default"> <span class="glyphicon glyphicon-thumbs-up"></span></button>
+            <!-- </div> -->
+            <!-- <div class="VoteButton Down" id={{id}}> -->
+            <button type="button" class="btn btn-default"> <span class="glyphicon glyphicon-thumbs-down"></span></button>
+            <!-- </div> -->
+          </div>
+        </div>
+    </div>
+      
+  </div>
+
+  <div class="row">
+    <div class="col-xs-8">
+      <ul style="list-style-type:none; ">
+        <li class="border">__________________________________________________________________________________________________________________________________________</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <br>
+  <br>
+  <br>
 {{/each}}

@@ -1,4 +1,4 @@
-.Main{
+/*.Main{
     font-family:Calibri, Helvetica, serif;
     color:#444;
     width:450px;
@@ -14,4 +14,43 @@
 h1, nav{
     text-align:center;
     margin:0 0 20px;
+}*/
+
+.btn {
+    /*margin-top: 5px;*/
+}
+
+.NumVotes{
+    font-size: 20px;
+    padding-left: 38px;
+    padding-top: 12px;
+}
+
+.VoteButton {
+    padding-top: 15px;
+    padding-left: 50px;
+}
+
+.btn.special {
+    background-color: #F5F5F5;
+    color: #333333;
+    background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6);
+    text-decoration: none;
+    background-position: 0;
+    transition: none;
+}
+
+.jumbotron {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    background-color: #F1F1F3;    
+}
+
+.Main {
+    background-color: #E1E0E0;
+    color: #364044;
+}
+
+.border {
+    color: rgba(34, 67, 14, 1);
 }
