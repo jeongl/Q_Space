@@ -43,7 +43,7 @@ h1, nav{
 .jumbotron {
     padding-top: 0px !important;
     padding-bottom: 0px !important;
-    background-color: #F1F1F3;    
+    background-color: rgba(9, 10, 10, 0.23);    
 }
 
 .Main {
@@ -51,6 +51,7 @@ h1, nav{
     color: #364044;
 }
 
-.border {
-    color: rgba(34, 67, 14, 1);
+.lineBorder {
+    background-color: rgba(34, 67, 14, 1);
+    margin-left: 25px;
 }
