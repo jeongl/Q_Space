@@ -11,17 +11,13 @@
 
 
     <div class="row">
-      <!-- <div class="col-sm-4"> -->
         <div class="col-xs-1">
           <p class="NumVotes">{{Votes}}</p>
         </div>    
         <div class="col-xs-3">
-          <div class="btn-group-sm VoteButton" >              
-            <button type="button" class="btn btn-default"> <span class="glyphicon glyphicon-thumbs-up"></span></button>
-            <!-- </div> -->
-            <!-- <div class="VoteButton Down" id={{id}}> -->
-            <button type="button" class="btn btn-default"> <span class="glyphicon glyphicon-thumbs-down"></span></button>
-            <!-- </div> -->
+          <div class="btn-group-sm VoteIcons" >              
+            <button type="button" id={{id}} class="btn btn-default VoteButton Up"> <span class="glyphicon glyphicon-thumbs-up"></span></button>
+            <button type="button" id={{id}} class="btn btn-default VoteButton Down"> <span class="glyphicon glyphicon-thumbs-down"></span></button>
           </div>
         </div>
     </div>

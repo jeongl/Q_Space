@@ -26,7 +26,7 @@ h1, nav{
     padding-top: 12px;
 }
 
-.VoteButton {
+.VoteIcons {
     padding-top: 15px;
     padding-left: 50px;
 }
@@ -49,6 +49,7 @@ h1, nav{
 .Main {
     background-color: #E1E0E0;
     color: #364044;
+    font-style: Lato;
 }
 
 .lineBorder {

@@ -36,18 +36,21 @@ define(['Views/QuoteCollectionView', 'Util/Spin', 'Models/SaveVote' ],function(Q
 
     fn.attachUpVoteHandler = function() {
       var self = this;
-      $('.VoteButton').on('click',function(e) {         
-        var voteNum = $(e.currentTarget).siblings();
-        var offset = $(e.target)[0].innerHTML==='Vote Down!' ? -1:1;
+      $('.VoteButton').on('click', function(e) {
+        window.el = $(e.currentTarget).parentsUntil('.col-xs-8').eq(2);   
+        var id = el.parent().find('.VoteIcons').find('button').attr('id');
+        var voteNum = $(el).find('.NumVotes').html();
+        var offset = /VoteButton Up/.test( $(e.currentTarget)[0].className) ? 1:-1;
+        console.log('el: ', el);
         var saveObj = {
-          num :  Number($(voteNum).filter('li.NumVotes').text()) + Number(offset),
-          name : $(voteNum).filter('#Name').text(),
-          quote : $(voteNum).filter('#Quote').text()
+          id : id,
+          num :  Number(voteNum) + Number(offset),
+          quote : $(el).parent().find('#Quote').html().split(' <span>')[0]
         }
         self.saveToDB(saveObj, {
           success: function(response) {
-            $(voteNum).filter('li.NumVotes').html( saveObj.num  );
-            // console.log('response after saving: ', response);
+            $(el).find('.NumVotes').html( saveObj.num  );
+            // console.log('response after saving: ', response);a
           },
           fail: function(response) {
             console.log('Failed response: ', response);

@@ -29,9 +29,11 @@ exports.checkQuotes = function(fn,env,res){
 exports.updateVote = function(req, fn){
 
   var query = 'UPDATE users SET Votes=?' +
-  'where Name = ? and Quote = ?'
+  'where id = ? and Quote = ?'
 
-  var values = [req.num, req.name, req.quote];
+  var values = [req.num, req.id, req.quote];
+
+  // console.log('Values: ', values);
 
   pool.getConnection(function(err, connection) {
     connection.query('use Quotes', function(err, rows) {
