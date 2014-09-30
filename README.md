@@ -18,3 +18,4 @@ ToDos:
  * mongo - second DB, just mirrors what's saved in mysql
  * cheerio - for scraping
  * bootstrap
+ * async - used to scrape a collection of links from the front page
